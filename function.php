@@ -261,3 +261,52 @@ function data_to_xml($data) {
     }
     return $xml;
 }
+
+
+/**
+ * 格式化友好时间
+ * @param sTime 源时间
+ * @param type 时间格式精简范围 normal(default)/full/month
+ * @return 友好时间
+ */
+function friendlyDate($sTime,$type = 'normal',$alt = 'false') {
+    if(!$sTime) {
+        return '';
+    }
+    //sTime=源时间，cTime=当前时间，dTime=时间差
+    $cTime = time();
+    $dTime = $cTime - $sTime;
+    $dDay = intval(date("Ymd",$cTime)) - intval(date("Ymd",$sTime));
+    $dYear = intval(date("Y",$cTime)) - intval(date("Y",$sTime));
+    //normal：n秒前，n分钟前，n小时前，日期
+    if($type=='normal') {
+        if( $dTime < 60 ) {
+            return $dTime."秒前";
+        }elseif( $dTime < 3600 ) {
+            return intval($dTime/60)."分钟前";
+        }elseif( $dTime >= 3600 && $dDay == 0  ) {
+            return intval($dTime/3600)."小时前";
+        }elseif($dYear==0) {
+            return date("m-d H:i",$sTime);
+        }else {
+            return date("y-m-d H:i",$sTime);
+        }
+    //full: Y-m-d , H:i:s
+    }elseif($type=='full') {
+        return date("y-m-d H:i",$sTime);
+    }elseif($type=='month') {
+        return date("m-d H:i",$sTime);
+    }else {
+        if( $dTime < 60 ) {
+            return $dTime."秒前";
+        }elseif( $dTime < 3600 ) {
+            return intval($dTime/60)."分钟前";
+        }elseif( $dTime >= 3600 && $dDay == 0  ) {
+            return intval($dTime/3600)."小时前";
+        }elseif($dYear==0) {
+            return date("y-m-d H:i",$sTime);
+        }else {
+            return date("y-m-d H:i",$sTime);
+        }
+    }
+}
