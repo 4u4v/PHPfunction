@@ -1,5 +1,10 @@
 <?php
-
+/**
+ *  部分函数来源于其它开源程序，使用时请保留原作者版权，尊重开源精神 :)
+ *  若部分函数侵犯了您的版权或未标注作者请联系我或直接Pull Requests
+ *  Author:EagleWu
+ *  Email:eaglewudi@gmain.com
+ * /
 
 
 /**
